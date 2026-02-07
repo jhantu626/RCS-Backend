@@ -24,7 +24,7 @@ public class UserDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    User mapToUser(){
+    public User mapToUser(){
         return User.builder()
                 .id(this.id)
                 .userName(this.userName)
