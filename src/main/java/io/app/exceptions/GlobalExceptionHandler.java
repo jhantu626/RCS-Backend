@@ -18,4 +18,13 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse handleResourceNotFoundException(ResourceNotFoundException ex){
+        return ApiResponse.builder()
+                .status(false)
+                .message(ex.getMessage())
+                .build();
+    }
+
 }
