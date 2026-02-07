@@ -34,6 +34,7 @@ public class ApplicationConfig {
         return daoAuthenticationProvider;
     }
 
+    @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(10);
     }
