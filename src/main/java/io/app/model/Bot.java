@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Bot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String botName;
     private String botKey;
     private boolean isActive;
