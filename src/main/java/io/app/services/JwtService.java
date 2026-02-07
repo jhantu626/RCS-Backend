@@ -48,12 +48,8 @@ public class JwtService {
     public List<SimpleGrantedAuthority> getAuthorities(String token){
         String role=extractClaims(token).get("role",String.class);
         return List.of(
-                new SimpleGrantedAuthority(role)
+                new SimpleGrantedAuthority("ROLE_"+role)
         );
-    }
-
-    private String getPassword(String token){
-        return extractClaims(token).get("pass",String.class);
     }
 
     private Claims extractClaims(String token){
@@ -68,7 +64,6 @@ public class JwtService {
         Map<String,Object> claims=new HashMap<>();
         claims.put("userId",user.getId());
         claims.put("role",user.getRole().name());
-        claims.put("pass",user.getPassword());
         return generateToken(user,claims);
     }
 
