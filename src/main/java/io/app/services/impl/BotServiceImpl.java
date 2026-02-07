@@ -1,6 +1,7 @@
 package io.app.services.impl;
 
 import io.app.dto.ApiResponse;
+import io.app.exceptions.RequiredFieldException;
 import io.app.model.Bot;
 import io.app.repository.BotRepository;
 import io.app.services.BotService;
@@ -18,15 +19,9 @@ public class BotServiceImpl implements BotService {
     @Override
     public ApiResponse createBot(Bot bot) {
         if (bot.getBotName()==null) {
-            return ApiResponse.builder()
-                    .message("Bot Name is Required")
-                    .status(false)
-                    .build();
+            throw new RequiredFieldException("Bot Name is Required");
         }else if (bot.getBotKey()==null){
-            return ApiResponse.builder()
-                    .status(false)
-                    .message("Bot Key is Required")
-                    .build();
+            throw new RequiredFieldException("Bot Key Is Required");
         }
 
         repository.save(bot);
