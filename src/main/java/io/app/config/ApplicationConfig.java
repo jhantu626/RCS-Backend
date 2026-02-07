@@ -23,8 +23,9 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         return (username)->repository.findUserByUserName(username)
-                .orElseThrow(()->new ResourceNotFoundException("Invalid Credentials"));
+                    .orElseThrow(()->new ResourceNotFoundException("Invalid Credentials"));
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
