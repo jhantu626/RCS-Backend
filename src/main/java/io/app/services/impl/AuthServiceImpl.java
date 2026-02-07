@@ -3,6 +3,7 @@ package io.app.services.impl;
 import io.app.dto.ApiResponse;
 import io.app.dto.AuthResponse;
 import io.app.dto.UserDto;
+import io.app.exceptions.DuplicateFoundException;
 import io.app.exceptions.RequiredFieldException;
 import io.app.exceptions.ResourceNotFoundException;
 import io.app.model.User;
@@ -35,10 +36,12 @@ public class AuthServiceImpl implements AuthService {
         if (userDto.getUserName()==null || userDto.getPassword()==null || userDto.getRole()==null){
             throw new RequiredFieldException("Please Provide Required Field's");
         }
-
+        if (repository.existsUserByUserName(userDto.getUserName())){
+            throw new DuplicateFoundException("Username already exist");
+        }
         User user=userDto.mapToUser();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User savedUser=repository.save(user);
+        repository.save(user);
         return ApiResponse.builder()
                 .status(true)
                 .message("User Created Successfully")
@@ -47,6 +50,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(String username, String password) {
+        System.out.println(username);
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         username,
@@ -55,6 +59,7 @@ public class AuthServiceImpl implements AuthService {
         );
         User user=repository.findUserByUserName(username)
                 .orElseThrow(()->new ResourceNotFoundException("Invalid Credentials"));
+        IO.println(user.getId());
         boolean passwordMatching=passwordEncoder.matches(password,user.getPassword());
         if (!passwordMatching){
             throw new ResourceNotFoundException("Invalid Credential");
