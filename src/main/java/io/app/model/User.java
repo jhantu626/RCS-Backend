@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private Role role=Role.USER;
     @Enumerated(EnumType.STRING)
     private BillingType billingType;
-    private boolean isActive;
+    private boolean isActive=true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
