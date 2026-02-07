@@ -2,6 +2,7 @@ package io.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,12 +13,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-
-    private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthenticationProvider authenticationProvider;
 
     public SecurityConfig(AuthenticationProvider authenticationProvider,
-                          JwtAuthenticationFilter jwtAuthenticationFilter){
+                           JwtAuthenticationFilter jwtAuthenticationFilter){
         this.authenticationProvider=authenticationProvider;
         this.jwtAuthenticationFilter=jwtAuthenticationFilter;
     }
