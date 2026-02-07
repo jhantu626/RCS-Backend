@@ -22,4 +22,16 @@ public class Bot {
     private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @PrePersist
+    public void preCreate(){
+        this.createdAt=LocalDateTime.now();
+        this.updatedAt=LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        this.updatedAt=LocalDateTime.now();
+    }
+
 }
