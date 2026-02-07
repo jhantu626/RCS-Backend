@@ -17,7 +17,24 @@ public class BotServiceImpl implements BotService {
 
     @Override
     public ApiResponse createBot(Bot bot) {
-        return null;
+        if (bot.getBotName()==null) {
+            return ApiResponse.builder()
+                    .message("Bot Name is Required")
+                    .status(false)
+                    .build();
+        }else if (bot.getBotKey()==null){
+            return ApiResponse.builder()
+                    .status(false)
+                    .message("Bot Key is Required")
+                    .build();
+        }
+
+        repository.save(bot);
+
+        return ApiResponse.builder()
+                .message("Bot Created Successfully")
+                .status(true)
+                .build();
     }
 
     @Override
