@@ -27,4 +27,13 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(DuplicateFoundException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResponse handleDuplicateFoundException(DuplicateFoundException ex){
+        return ApiResponse.builder()
+                .status(false)
+                .message(ex.getMessage())
+                .build();
+    }
+
 }
