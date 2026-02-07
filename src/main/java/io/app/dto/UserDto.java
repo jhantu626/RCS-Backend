@@ -20,7 +20,7 @@ public class UserDto {
     private String password;
     private Role role;
     private BillingType billingType;
-    private boolean isActive;
+    private Boolean isActive=true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

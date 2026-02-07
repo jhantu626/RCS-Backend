@@ -31,7 +31,8 @@ public class User implements UserDetails {
     private Role role=Role.USER;
     @Enumerated(EnumType.STRING)
     private BillingType billingType;
-    private boolean isActive=true;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean isActive=true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -39,6 +40,7 @@ public class User implements UserDetails {
     public void preCreate(){
         this.createdAt=LocalDateTime.now();
         this.updatedAt=LocalDateTime.now();
+        this.isActive=true;
     }
 
     @PreUpdate
