@@ -1,6 +1,7 @@
 package io.app.services.impl;
 
 import io.app.dto.ApiResponse;
+import io.app.exceptions.DuplicateFoundException;
 import io.app.exceptions.RequiredFieldException;
 import io.app.model.Bot;
 import io.app.repository.BotRepository;
@@ -25,6 +26,10 @@ public class BotServiceImpl implements BotService {
             throw new RequiredFieldException("Bot Name is Required");
         }else if (bot.getBotKey()==null){
             throw new RequiredFieldException("Bot Key Is Required");
+        }
+
+        if (repository.existsBotByBotKey(bot.getBotKey())){
+            throw new DuplicateFoundException("Bot Name Already Exist");
         }
 
         repository.save(bot);
