@@ -6,7 +6,10 @@ import io.app.model.Bot;
 import io.app.repository.BotRepository;
 import io.app.services.BotService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BotServiceImpl implements BotService {
@@ -33,7 +36,8 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public Page<Bot> getBots() {
-        return null;
+    public List<Bot> getBots() {
+        List<Bot> allBots=repository.findAll();
+        return allBots;
     }
 }
