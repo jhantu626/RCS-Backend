@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BotRepository extends JpaRepository<Bot,Long> {
+    boolean existsBotByBotKey(String botKey);
 }
