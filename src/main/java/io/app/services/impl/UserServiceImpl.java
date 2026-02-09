@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto profile(String token) {
-        String username=jwtService.extractUsername(token);
+        String username=jwtService.extractUsername(jwtService.extractToken(token));
         Optional<User> optionalUser = repository.findUserByUserName(username);
         if (optionalUser.isEmpty()){
             throw new ResourceNotFoundException("Invalid Token");
