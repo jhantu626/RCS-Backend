@@ -11,6 +11,14 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class ApplicationConfig {
@@ -43,6 +51,23 @@ public class ApplicationConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration){
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        List<String> origins=new ArrayList<>();
+        origins.add("http://localhost:5173");
+        List<String> allowedMethods=List.of("GET","POST","PUT","DELETE");
+
+        CorsConfiguration configuration=new CorsConfiguration();
+        configuration.setAllowedOrigins(origins);
+        configuration.setAllowedMethods(allowedMethods);
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",configuration);
+        return source;
     }
 
 }
