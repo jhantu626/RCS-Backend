@@ -33,6 +33,7 @@ public class User implements UserDetails {
     private BillingType billingType;
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive=true;
+    private Long parentId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
