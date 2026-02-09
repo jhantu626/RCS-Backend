@@ -18,6 +18,7 @@ public class Bot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String botName;
+    @Column(unique = true)
     private String botKey;
     private boolean isActive;
     private LocalDateTime createdAt;
