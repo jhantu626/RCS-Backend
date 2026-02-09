@@ -19,6 +19,7 @@ import java.util.List;
 public class UserDto {
     private Long id;
     private String userName;
+    private String email;
     private String password;
     private Role role;
     private BillingType billingType;
@@ -37,6 +38,7 @@ public class UserDto {
                 .billingType(this.billingType)
                 .isActive(this.isActive)
                 .bots(this.bots)
+                .email(this.email)
                 .parentId(this.parentId)
                 .updatedAt(this.updatedAt)
                 .createdAt(this.createdAt)
