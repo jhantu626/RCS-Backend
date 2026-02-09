@@ -34,6 +34,8 @@ public class User implements UserDetails {
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive=true;
     private Long parentId;
+    @ManyToMany
+    private List<Bot> bots;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
