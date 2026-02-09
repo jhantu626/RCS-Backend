@@ -50,15 +50,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(String username, String password) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        username,
-                        password
-                )
-        );
         User user=repository.findUserByUserName(username)
                 .orElseThrow(()->new ResourceNotFoundException("Invalid Credentials"));
-        IO.println(user.getId());
         boolean passwordMatching=passwordEncoder.matches(password,user.getPassword());
         if (!passwordMatching){
             throw new ResourceNotFoundException("Invalid Credential");
