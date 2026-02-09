@@ -1,6 +1,7 @@
 package io.app.dto;
 
 import io.app.model.BillingType;
+import io.app.model.Bot;
 import io.app.model.Role;
 import io.app.model.User;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,9 +22,11 @@ public class UserDto {
     private String password;
     private Role role;
     private BillingType billingType;
+    private Long parentId;
     private Boolean isActive=true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<Bot> bots;
 
     public User mapToUser(){
         return User.builder()
@@ -32,6 +36,8 @@ public class UserDto {
                 .role(this.role)
                 .billingType(this.billingType)
                 .isActive(this.isActive)
+                .bots(this.bots)
+                .parentId(this.parentId)
                 .updatedAt(this.updatedAt)
                 .createdAt(this.createdAt)
                 .build();
