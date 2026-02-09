@@ -50,7 +50,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(String username, String password) {
-        System.out.println(username);
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         username,
