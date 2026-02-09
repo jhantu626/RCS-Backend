@@ -20,6 +20,7 @@ public class BotController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse> create(@RequestBody Bot bot){
         return new ResponseEntity<>(service.createBot(bot), HttpStatus.CREATED);
     }
