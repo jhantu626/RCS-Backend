@@ -29,7 +29,7 @@ public class BotServiceImpl implements BotService {
         }
 
         if (repository.existsBotByBotKey(bot.getBotKey())){
-            throw new DuplicateFoundException("Bot Name Already Exist");
+            throw new DuplicateFoundException("Bot Already Exist");
         }
 
         repository.save(bot);
